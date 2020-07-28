@@ -519,6 +519,17 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       },
       heading: { level: '4' }, // level ranges from 1-6
     },
+    card: {
+      container: {
+        round: 'small',
+        elevation: 'small',
+      },
+      header: {},
+      body: {},
+      footer: {
+        background: 'background-contrast',
+      },
+    },
     carousel: {
       icons: {
         current: Subtract,
@@ -640,6 +651,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       baseline: 500,
     },
     dataTable: {
+      // body: {
+      //   extend: undefined,
+      // },
       groupHeader: {
         background: {
           dark: 'dark-2',
@@ -691,6 +705,7 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         side: 'bottom',
       },
       content: {
+        // margin: undefined,
         pad: 'small',
       },
       disabled: {
@@ -840,6 +855,7 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       // extend: undefined,
       icons: {
         down: FormDown,
+        // up: undefined,
         // color: { dark: undefined, light: undefined },
       },
     },
@@ -865,6 +881,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       },
       check: {
         radius: '100%',
+        // background: {
+        //  color: undefined,
+        // },
         // color: { dark: undefined, light: undefined },
         // extend: undefined,
       },
@@ -886,6 +905,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
       },
       gap: 'small',
       size: `${baseSpacing}px`,
+      font: {
+        // weight: undefined,
+      },
     },
     rangeInput: {
       // extend: undefined
@@ -964,6 +986,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
             light: 'black',
           },
         },
+        disabled: {
+          // color: undefined,
+        },
         hover: {
           color: {
             dark: 'white',
@@ -973,6 +998,9 @@ export const generate = (baseSpacing = 24, scale = 6) => {
         },
       },
       color: 'control',
+      // disabled: {
+      //   color: undefined,
+      // },
       // extend: undefined,
       hover: {
         // background: undefined,

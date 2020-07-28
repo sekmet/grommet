@@ -126,7 +126,10 @@ string
 
 **bounds**
 
-The limits for the values, specified as a two dimensional array.
+The limits for the values, specified as a two dimensional array. 
+      The first array specifies the limits of the x-axis. The second array 
+      specifies the limits of the y-axis. 
+      For example: [[x-min, x-max], [y-min, y-max]].
       If not specified, the bounds will automatically be set to fit
       the provided values.
 
@@ -146,7 +149,16 @@ A color identifier to use for the graphic color. If an
 ```
 string
 {
-  color: string,
+  dark: string,
+  light: string
+}
+{
+  color: 
+    string
+    {
+      dark: string,
+      light: string
+    },
   opacity: 
     weak
     medium
@@ -154,7 +166,12 @@ string
     boolean
 }
 [{
-  color: string,
+  color: 
+    string
+    {
+      dark: string,
+      light: string
+    },
   value: number
 }]
 ```
@@ -307,6 +324,21 @@ xlarge
 string
 ```
 
+**point**
+
+When using a 'point' type, what shape the points should use.
+      If this property is not specified, points will be drawn as a square or
+      a circle, based on how 'round' is specified.
+
+```
+circle
+diamond
+square
+star
+triangle
+triangleDown
+```
+
 **round**
 
 Whether to round the line ends.
@@ -372,6 +404,7 @@ large
 xlarge
 none
 string
+number
 ```
 
 **type**
@@ -392,15 +425,36 @@ Required. Array of value objects describing the data.
       indicating the x coordinate and a range of two y coordinates.
       'label' is a text string describing it.
       'onHover' and 'onClick' only work when type='bar'.
+      'color', 'opacity', and 'thickness' allow bar and point charts to have
+      color variation per-value.
 
 ```
 [
   number
   [number]
   {
+    color: 
+      string
+      {
+        dark: string,
+        light: string
+      },
     label: string,
     onClick: function,
     onHover: function,
+    opacity: 
+      string
+      number,
+    thickness: 
+      hair
+      xsmall
+      small
+      medium
+      large
+      xlarge
+      none
+      string
+      number,
     value: 
       number
       [number]

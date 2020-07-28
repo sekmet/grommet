@@ -1976,6 +1976,21 @@ xlarge
 string
 \`\`\`
 
+**children**
+
+Function that can be called to render the visual representation.
+      Button can take in Children as a function, node, or object. 
+      For example hover can be passed as an object that would 
+      then return a react element.
+      \`children={({ hover }) => <Box...>{...}</Box>}\`
+      
+
+\`\`\`
+function
+object
+node
+\`\`\`
+
 **active**
 
 Whether the button is active.
@@ -2175,6 +2190,7 @@ _self
 _blank
 _parent
 _top
+string
 \`\`\`
 
 **type**
@@ -3534,6 +3550,104 @@ Defaults to
   }
 \`\`\`
 ",
+  "Card": "## Card
+A Card.
+
+[![](https://cdn-images-1.medium.com/fit/c/120/120/1*TD1P0HtIH9zF0UEH28zYtw.png)](https://storybook.grommet.io/?selectedKind=Card&full=0&addons=0&stories=1&panelRight=0) [![](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=card&module=%2Fsrc%2FCard.js)
+## Usage
+
+\`\`\`javascript
+import { Card } from 'grommet';
+<Card/>
+\`\`\`
+
+## Properties
+
+  
+## Intrinsic element
+
+\`\`\`
+div
+\`\`\`
+## Theme
+  
+**card.container**
+
+Any valid Box prop for the Card container. Expects \`object\`.
+
+Defaults to
+
+\`\`\`
+{ round: 'small', elevation: 'small' }
+\`\`\`
+
+**card.header**
+
+Any valid Box prop for the CardHeader. Expects \`object\`.
+
+Defaults to
+
+\`\`\`
+[object Object]
+\`\`\`
+
+**card.body**
+
+Any valid Box prop for the CardBody. Expects \`object\`.
+
+Defaults to
+
+\`\`\`
+[object Object]
+\`\`\`
+
+**card.footer**
+
+Any valid Box prop for the CardFooter container. Expects \`object\`.
+
+Defaults to
+
+\`\`\`
+{ background: 'background-contrast' }
+\`\`\`
+",
+  "CardBody": "## CardBody
+The Card Body.
+
+
+## Properties
+
+  
+## Intrinsic element
+
+\`\`\`
+div
+\`\`\`",
+  "CardFooter": "## CardFooter
+The Card Footer. Works best as the latter sibling of CardBody or any 
+      other flex container.
+
+
+## Properties
+
+  
+## Intrinsic element
+
+\`\`\`
+div
+\`\`\`",
+  "CardHeader": "## CardHeader
+The Card Header.
+
+
+## Properties
+
+  
+## Intrinsic element
+
+\`\`\`
+div
+\`\`\`",
   "Carousel": "## Carousel
 A carousel that cycles through children. Child components
       would typically be Images. It is the caller's responsibility to ensure
@@ -3928,7 +4042,10 @@ string
 
 **bounds**
 
-The limits for the values, specified as a two dimensional array.
+The limits for the values, specified as a two dimensional array. 
+      The first array specifies the limits of the x-axis. The second array 
+      specifies the limits of the y-axis. 
+      For example: [[x-min, x-max], [y-min, y-max]].
       If not specified, the bounds will automatically be set to fit
       the provided values.
 
@@ -3948,7 +4065,16 @@ A color identifier to use for the graphic color. If an
 \`\`\`
 string
 {
-  color: string,
+  dark: string,
+  light: string
+}
+{
+  color: 
+    string
+    {
+      dark: string,
+      light: string
+    },
   opacity: 
     weak
     medium
@@ -3956,7 +4082,12 @@ string
     boolean
 }
 [{
-  color: string,
+  color: 
+    string
+    {
+      dark: string,
+      light: string
+    },
   value: number
 }]
 \`\`\`
@@ -4109,6 +4240,21 @@ xlarge
 string
 \`\`\`
 
+**point**
+
+When using a 'point' type, what shape the points should use.
+      If this property is not specified, points will be drawn as a square or
+      a circle, based on how 'round' is specified.
+
+\`\`\`
+circle
+diamond
+square
+star
+triangle
+triangleDown
+\`\`\`
+
 **round**
 
 Whether to round the line ends.
@@ -4174,6 +4320,7 @@ large
 xlarge
 none
 string
+number
 \`\`\`
 
 **type**
@@ -4194,15 +4341,36 @@ Required. Array of value objects describing the data.
       indicating the x coordinate and a range of two y coordinates.
       'label' is a text string describing it.
       'onHover' and 'onClick' only work when type='bar'.
+      'color', 'opacity', and 'thickness' allow bar and point charts to have
+      color variation per-value.
 
 \`\`\`
 [
   number
   [number]
   {
+    color: 
+      string
+      {
+        dark: string,
+        light: string
+      },
     label: string,
     onClick: function,
     onHover: function,
+    opacity: 
+      string
+      number,
+    thickness: 
+      hair
+      xsmall
+      small
+      medium
+      large
+      xlarge
+      none
+      string
+      number,
     value: 
       number
       [number]
@@ -4312,6 +4480,15 @@ import { CheckBox } from 'grommet';
 
 ## Properties
 
+**a11yTitle**
+
+Custom label to be used by screen readers.
+      When provided, an aria-label will be added to the element.
+
+\`\`\`
+string
+\`\`\`
+
 **checked**
 
 Same as React <input checked={} />
@@ -4339,7 +4516,8 @@ string
 
 **label**
 
-Label text to place next to the control.
+Label text to place next to the control. 
+      Can be used instead of a11yTitle to meet accessibility requirements
 
 \`\`\`
 node
@@ -4869,7 +5047,7 @@ string
 
 ISO8601 time or duration. For example: 'PT8H12M23S',
       'T08:12:23', or '2015-02-22T08:12:23'. Any included date
-      portion will be ignored for an analog clock. If not provided, the
+      portion will be ignored. If not provided, the
       current browser time will be used.
 
 \`\`\`
@@ -6011,35 +6189,40 @@ string
     small
     medium
     large
-    xlarge,
+    xlarge
+    string,
   vertical: 
     xxsmall
     xsmall
     small
     medium
     large
-    xlarge,
+    xlarge
+    string,
   top: 
     xxsmall
     xsmall
     small
     medium
     large
-    xlarge,
+    xlarge
+    string,
   bottom: 
     xxsmall
     xsmall
     small
     medium
     large
-    xlarge,
+    xlarge
+    string,
   left: 
     xxsmall
     xsmall
     small
     medium
     large
-    xlarge,
+    xlarge
+    string,
   right: 
     xxsmall
     xsmall
@@ -6047,6 +6230,7 @@ string
     medium
     large
     xlarge
+    string
 }
 {
   header: custom,
@@ -6159,6 +6343,16 @@ Defaults to
 
 \`\`\`
 { dark: 'white', light: 'black' }
+\`\`\`
+
+**dataTable.body.extend**
+
+Any additional style for an DataTable Body Expects \`string | (props) => {}\`.
+
+Defaults to
+
+\`\`\`
+undefined
 \`\`\`
 
 **dataTable.groupHeader.background**
@@ -6311,6 +6505,137 @@ Defaults to
 undefined
 \`\`\`
 ",
+  "DateInput": "## DateInput
+A control to input a single date or a date range.
+
+[![](https://cdn-images-1.medium.com/fit/c/120/120/1*TD1P0HtIH9zF0UEH28zYtw.png)](https://storybook.grommet.io/?selectedKind=DateInput&full=0&addons=0&stories=1&panelRight=0) [![](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/grommet/grommet-sandbox?initialpath=dateinput&module=%2Fsrc%2FDateInput.js)
+## Usage
+
+\`\`\`javascript
+import { DateInput } from 'grommet';
+<DateInput id='item' name='item' />
+\`\`\`
+
+## Properties
+
+**buttonProps**
+
+Any properties to pass on to the underlying DropButton
+      when not inline and no format.
+
+\`\`\`
+{
+
+}
+\`\`\`
+
+**calendarProps**
+
+Any properties to pass on to the underlying Calendar.
+
+\`\`\`
+{
+
+}
+\`\`\`
+
+**defaultValue**
+
+The default date or date range value in ISO8601 format.
+
+\`\`\`
+string
+[string]
+\`\`\`
+
+**dropProps**
+
+Any properties to pass on to the underlying Drop when not inline. Defaults to \`{
+  \\"align\\": {
+    \\"top\\": \\"bottom\\",
+    \\"left\\": \\"left\\"
+  }
+}\`.
+
+\`\`\`
+{
+
+}
+\`\`\`
+
+**format**
+
+The date format to use. If not specified, the date value will not
+      be displayed as a text string and the user will not be able to enter
+      a date by typing. For example: 'mm/dd/yyyy', or for a range:
+      'mm/dd/yyyy-mm/dd/yyyy'. This property should be used when in a Form.
+
+\`\`\`
+string
+\`\`\`
+
+**id**
+
+The id of the input.
+
+\`\`\`
+string
+\`\`\`
+
+**inline**
+
+Whether the calendar should always be shown or via a Drop when
+      interacting with the input.
+
+\`\`\`
+boolean
+\`\`\`
+
+**inputProps**
+
+Any properties to pass on to the underlying MaskedInput
+      when there is a format.
+
+\`\`\`
+{
+
+}
+\`\`\`
+
+**name**
+
+The name of the input.
+      This property is required when used within FormField.
+
+\`\`\`
+string
+\`\`\`
+
+**onChange**
+
+Function that will be called when the user types or selects a date.
+      The updated value will be available via 'event.value'.
+
+\`\`\`
+function
+\`\`\`
+
+**value**
+
+The date or date range value(s) in ISO8601 format.
+
+\`\`\`
+string
+[string]
+\`\`\`
+  
+## Intrinsic element
+
+\`\`\`
+div
+\`\`\`
+## Theme
+  ",
   "Diagram": "## Diagram
 Graphical connection lines. Diagram is meant to be used with Stack.
       Boxes can be used in the \`guidingChild\` layer of Stack and then
@@ -7197,10 +7522,21 @@ import { FormField } from 'grommet';
 
 ## Properties
 
+**a11yTitle**
+
+Custom label to be used by screen readers.
+       Should only be provided if FormField has no children.
+       When a11yTitle is provided an aria-label will be added to the element
+       if it has no children.
+
+\`\`\`
+string
+\`\`\`
+
 **component**
 
-The component to insert in the FormField. Grommet will add update the 
-      form values when this field changes. Any additional properties 
+The component to insert in the FormField. Grommet will add update the
+      form values when this field changes. Any additional properties
       (such as initial value) you pass to FormField will be forwarded to this
       component. The component may be custom as long it supports the properties
       of name, value, onChange (event => {}), while event has either event.value
@@ -7383,7 +7719,7 @@ Validation rule when used within a grommet Form. Provide an object
 
 \`\`\`
 {
-  regexp: object,
+  regexp: new RegExp(...),
   message: 
     string
     node,
@@ -7394,7 +7730,7 @@ Validation rule when used within a grommet Form. Provide an object
 function
 [
   {
-    regexp: object,
+    regexp: new RegExp(...),
     message: 
       string
       node,
@@ -7451,6 +7787,16 @@ Defaults to
 
 \`\`\`
 bottom
+\`\`\`
+
+**formField.content.margin**
+
+The margin of the FormField content. Expects \`object\`.
+
+Defaults to
+
+\`\`\`
+undefined
 \`\`\`
 
 **formField.content.pad**
@@ -9940,6 +10286,14 @@ import { MaskedInput } from 'grommet';
 
 ## Properties
 
+**a11yTitle**
+
+Custom title to be used by screen readers.
+
+\`\`\`
+string
+\`\`\`
+
 **icon**
 
 An optional icon to show. This could be used to provide an
@@ -10348,6 +10702,19 @@ xlarge
 string
 \`\`\`
 
+**children**
+
+Function that will be called to render the visual representation.
+      It will be passed an object containing button props.
+      It should return a react element.
+      For example:
+      \`children={({ drop, hover }) => <Box ...>{...}</Box>}\`
+      
+
+\`\`\`
+function
+\`\`\`
+
 **disabled**
 
 Whether the menu should be disabled.
@@ -10445,7 +10812,8 @@ node
 **items**
 
 Required. Menu items to be placed inside the drop down.
-The object values can be any Button prop, for example: label and onClick. Defaults to \`[]\`.
+The object values can be any Button prop, 
+for example: label, onClick, and href. Defaults to \`[]\`.
 
 \`\`\`
 [object]
@@ -10544,12 +10912,24 @@ undefined
 
 **menu.icons.down**
 
-The icon to show to the right of the label. Expects \`React.Element\`.
+The icon to show to the right of the label when menu is 
+    closed. Expects \`React.Element\`.
 
 Defaults to
 
 \`\`\`
 <FormDown />
+\`\`\`
+
+**menu.icons.up**
+
+The icon to show to the right of the label when menu is 
+    opened. Expects \`undefined | React.Element\`.
+
+Defaults to
+
+\`\`\`
+undefined
 \`\`\`
 ",
   "Meter": "## Meter
@@ -11153,6 +11533,15 @@ import { RadioButton } from 'grommet';
 
 ## Properties
 
+**a11yTitle**
+
+Custom label to be used by screen readers.
+      When provided, an aria-label will be added to the element.
+
+\`\`\`
+string
+\`\`\`
+
 **checked**
 
 Same as React <input checked={} />
@@ -11225,6 +11614,17 @@ input
 \`\`\`
 ## Theme
   
+**global.colors.control**
+
+The default color of the border surrounding 
+    the checked icon in RadioButton checked state. Expects \`string | { dark: string, light: string }\`.
+
+Defaults to
+
+\`\`\`
+{ dark: 'accent-1', light: 'brand'}
+\`\`\`
+
 **radioButton.border.color**
 
 The color of the border of the Radio Button. Expects \`string | { dark: string, light: string }\`.
@@ -11243,6 +11643,16 @@ Defaults to
 
 \`\`\`
 2px
+\`\`\`
+
+**radioButton.check.background.color**
+
+The background color of the checked icon in the RadioButton. Expects \`string | {dark: string, light: string}\`.
+
+Defaults to
+
+\`\`\`
+undefined
 \`\`\`
 
 **radioButton.check.color**
@@ -11304,6 +11714,16 @@ Defaults to
 
 \`\`\`
 small
+\`\`\`
+
+**radioButton.font.weight**
+
+The font weight of the label. Expects \`number | string\`.
+
+Defaults to
+
+\`\`\`
+undefined
 \`\`\`
 
 **radioButton.size**
@@ -11448,6 +11868,15 @@ import { RangeInput } from 'grommet';
 \`\`\`
 
 ## Properties
+
+**a11yTitle**
+
+Custom label to be used by screen readers.
+      When provided, an aria-label will be added to the element.
+
+\`\`\`
+string
+\`\`\`
 
 **id**
 
@@ -12993,14 +13422,44 @@ Defaults to
     }
 \`\`\`
 
+**tab.border.disabled.color**
+
+border color of the Tab when disabled Expects \`string | {dark: string, light: string}\`.
+
+Defaults to
+
+\`\`\`
+undefined
+\`\`\`
+
 **tab.color**
 
-text color for the Tab. Expects \`string\`.
+text color for the Tab. Expects \`string | {dark: string, light: string}\`.
 
 Defaults to
 
 \`\`\`
 control
+\`\`\`
+
+**tab.disabled.color**
+
+text color of the Tab when disabled. Expects \`string | {dark: string, light: string}\`.
+
+Defaults to
+
+\`\`\`
+undefined
+\`\`\`
+
+**tab.extend**
+
+Any additional style for Tab. Expects \`string | (props) => {}\`.
+
+Defaults to
+
+\`\`\`
+undefined
 \`\`\`
 
 **tab.hover.background**
@@ -14199,6 +14658,15 @@ import { TextArea } from 'grommet';
 
 ## Properties
 
+**a11yTitle**
+
+Custom label to be used by screen readers.
+      When provided, an aria-label will be added to the element.
+
+\`\`\`
+string
+\`\`\`
+
 **id**
 
 The id attribute of the textarea.
@@ -14489,6 +14957,14 @@ import { TextInput } from 'grommet';
 
 ## Properties
 
+**a11yTitle**
+
+Custom title to be used by screen readers.
+
+\`\`\`
+string
+\`\`\`
+
 **dropAlign**
 
 How to align the drop. Defaults to \`{
@@ -14572,7 +15048,7 @@ boolean
 
 **messages**
 
-Custom messages for TextInput. Used for accessibility by screen 
+Custom messages for TextInput. Used for accessibility by screen
         readers. Defaults to \`{
   \\"enterSelect\\": \\"(Press Enter to Select)\\",
   \\"suggestionsCount\\": \\"suggestions available\\",
@@ -14751,7 +15227,7 @@ Defaults to
 
 **text**
 
-The possible sizes of the text in terms of its font-size and 
+The possible sizes of the text in terms of its font-size and
     line-height. Expects \`object\`.
 
 Defaults to
@@ -15190,6 +15666,76 @@ Defaults to
 
 \`\`\`
 rgba(0, 0, 0, 0.7)
+\`\`\`
+
+**video.icons.closedCaption**
+
+The icon to use for the caption. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<ClosedCaption />
+\`\`\`
+
+**video.icons.configure**
+
+The icon to use for the configuration action. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<Actions />
+\`\`\`
+
+**video.icons.fullScreen**
+
+The icon to use for viewing the video in full screen. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<Expand />
+\`\`\`
+
+**video.icons.pause**
+
+The icon to use for pausing the video. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<Pause />
+\`\`\`
+
+**video.icons.play**
+
+The icon to use for playing the video. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<Play />
+\`\`\`
+
+**video.icons.reduceVolume**
+
+The icon to use for the action of lowering the volume. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<VolumeLow />
+\`\`\`
+
+**video.icons.volume**
+
+The icon to use for the action of raising the volume. Expects \`React.Element\`.
+
+Defaults to
+
+\`\`\`
+<Volume />
 \`\`\`
 
 **video.scrubber.color**
